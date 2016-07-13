@@ -5,6 +5,7 @@ tags: css
 # 页面之本：inline 与 block
 
 讲完页面的盒子模型，可以理解到网页上丰富的页面效果是由一个一个盒子构成的，而盒子种类，其实有很多种，用的最多的就是inline、block与inline-block，这节我们重点讲下inline和block属性
+<!--more-->
 
 ## display:inline
 

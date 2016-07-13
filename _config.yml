@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Coding Your Life
-subtitle: 
+title: 七月上
+subtitle: 公元前我们太小,公元后我们又太老,没有谁见过,那一次真正美丽的微笑。
 description:
 author: 君羽
-language:
-timezone:
+language: Chinese
+timezone: 
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: pacman
+theme: next
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html

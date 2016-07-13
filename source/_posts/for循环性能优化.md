@@ -12,6 +12,8 @@ for(var i =0;i<btns.length;i++){
 }
 ```
 然而这种方式是最低效的，首先每次循环需要不断地换区btns.length，故对此可做如下修改
+<!--more-->
+
 ```
 var btns = document.getElementsByTagName("button");
 for(var i = 0,len = btns.length;i<len;i++){

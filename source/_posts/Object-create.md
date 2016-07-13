@@ -5,6 +5,7 @@ tags: JavaScript
 # Object.create 与 Object.defineProperty
 Object.create() 是什么？
 Object.create(proto [, propertiesObject ]) 是ES5中新引入的对象快捷创建方式
+<!--more-->
 
 第一个参数是一个{}，用于指向新创建的函数的prototype，如果为NULL，则创建一个__proto__指向Object的对象
 

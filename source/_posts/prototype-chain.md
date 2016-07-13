@@ -13,6 +13,7 @@ prototype 是 constructor 的其中一个属性
 2 把新对象的__proto__属性指引到构造函数的prototype
 3 完成对象的初始化
 4 把这个对象隐式地return 出来
+<!--more-->
 
 ```
 var a = {

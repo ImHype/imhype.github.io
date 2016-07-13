@@ -7,6 +7,7 @@ tags: css
 position 是指元素在网页中所存在的方式，给元素设置不同的position会改变元素的包含块。
 
 学习position的时候，要搞懂另外几个上下文的概念 normal flow(常规流)、containning block、bfc、base line等等等。
+<!--more-->
 
 一一展开介绍
 

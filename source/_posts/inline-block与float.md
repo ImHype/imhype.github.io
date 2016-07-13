@@ -6,6 +6,8 @@ tags:
 
 一直在想inline-block与float有什么关系呢，因为觉得inline-block与float的的效果是类似的
 比如，我要做一个nav，我有两种方式
+<!--more-->
+
 ```
 	<style type="text/css">
 		.float li{
