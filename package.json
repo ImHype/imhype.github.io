@@ -6,7 +6,7 @@
     "pub": "hexo clean && hexo deploy"
   },
   "hexo": {
-    "version": "3.3.5"
+    "version": "3.3.8"
   },
   "dependencies": {
     "hexo": "^3.1.0",
