@@ -94,6 +94,7 @@ const ComponentA = Regular.extend({
         return this.data.list.map(item => item.title);
     }
 });
+```
 
 > 一般三类方法是必须的 1. 事件 handler; 2. compute get 方法; 3. data 的操作方法
 
