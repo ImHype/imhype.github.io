@@ -36,8 +36,8 @@ store.subscribe(function () {
 ```
 
 理解他，我们可以结合后端 MVC 的 web 模型
-![web架构](https://haitao.nos.netease.com/016f670d-85e4-4c88-ac75-fb9d92b4f4c0.jpeg)
-![redux架构](https://haitao.nos.netease.com/297f9fec-841f-4137-b0c3-eef617fa4bf5.jpeg)
+![web架构](https://haitao.nos.netease.com/b9190c99-f5a3-4637-890e-9a597f2099f4.jpeg)
+![redux架构](https://haitao.nos.netease.com/d8d909af-b660-48bb-a197-542421332ecc.jpeg)
 
 # 演员表
 ## Store 饰演 应用服务器
@@ -102,8 +102,8 @@ redux.createStore(reducer);
 # 完成与视图层的绑定
 Redux 职责是状态管理，并非只限定于前端开发，要使用到 web 开发当中，还缺少一个部分，完成 MVC 中剩下的一些操作（渲染页面）。
 
-![web架构](https://haitao.nos.netease.com/016f670d-85e4-4c88-ac75-fb9d92b4f4c0.jpeg)
-![v-redux架构](https://haitao.nos.netease.com/69631df5-b412-41c1-be79-412567b995bd.jpg)
+![web架构](https://haitao.nos.netease.com/b9190c99-f5a3-4637-890e-9a597f2099f4.jpeg)
+![v-redux架构](https://haitao.nos.netease.com/6f685b72-19bd-4dfd-a191-0de7d0dfa10e.jpg)
 
 ## 两个重要的 API
 * store.subscribe(f) - 发布订阅模型， 方法 f 会在 dispatch 触发后执行
