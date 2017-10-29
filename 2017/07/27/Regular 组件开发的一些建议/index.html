@@ -1,0 +1,398 @@
+
+ <!DOCTYPE HTML>
+<html lang="Chinese">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Regular 组件开发的一些建议 | 七月上</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="君羽">
+    
+    <meta name="description" content="前言近几年来，前端开发这个概念发生了明显的变化。多年以前，前端开发的重点可能是使用 HTML/CSS/JS 和一些兼容知识来完成页面的构建，动效的制作。
+而现阶段的前端开发，工作的很重要的部分，就是使用 Vue/React 或其他 MVVM 框架来完成我们的组件，并组织我们的页面。
+我们来进入现实的">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/69f3e963f8eef1de49970dd1b0693565_l.jpg" alt="七月上" title="七月上"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="七月上">七月上</a></h1>
+				<h2 class="blog-motto">公元前我们太小,公元后我们又太老,没有谁见过,那一次真正美丽的微笑。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:imhype.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/07/27/Regular 组件开发的一些建议/" title="Regular 组件开发的一些建议" itemprop="url">Regular 组件开发的一些建议</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://imhype.github.io" title="君羽">君羽</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2017-07-27T14:27:31.000Z" itemprop="datePublished">2017-07-27</time>
+    Updated:<time datetime="2017-10-29T10:59:06.086Z" itemprop="dateModified">2017-10-29</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于-RegularJS-开发的一些槽点"><span class="toc-number">2.</span> <span class="toc-text">关于 RegularJS 开发的一些槽点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-过度庞大的组件"><span class="toc-number">2.1.</span> <span class="toc-text">1. 过度庞大的组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述"><span class="toc-number">2.1.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建议"><span class="toc-number">2.1.2.</span> <span class="toc-text">建议</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-组件原型上存放一些原本可以抽出的方法"><span class="toc-number">2.2.</span> <span class="toc-text">2. 组件原型上存放一些原本可以抽出的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建议-1"><span class="toc-number">2.2.2.</span> <span class="toc-text">建议</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-滥用双向绑定"><span class="toc-number">2.3.</span> <span class="toc-text">3. 滥用双向绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述-2"><span class="toc-number">2.3.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决"><span class="toc-number">2.3.2.</span> <span class="toc-text">解决</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-习惯把所有数据都放置到-this-data-上"><span class="toc-number">2.4.</span> <span class="toc-text">4. 习惯把所有数据都放置到 this.data 上</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述-3"><span class="toc-number">2.4.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决-1"><span class="toc-number">2.4.2.</span> <span class="toc-text">解决</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-组件传入的参数结构不明了"><span class="toc-number">2.5.</span> <span class="toc-text">5. 组件传入的参数结构不明了</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述-4"><span class="toc-number">2.5.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决-2"><span class="toc-number">2.5.2.</span> <span class="toc-text">解决</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-较长的表达式"><span class="toc-number">2.6.</span> <span class="toc-text">6. 较长的表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述-5"><span class="toc-number">2.6.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决-3"><span class="toc-number">2.6.2.</span> <span class="toc-text">解决</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+		</div>
+		
+		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>近几年来，前端开发这个概念发生了明显的变化。多年以前，前端开发的重点可能是使用 HTML/CSS/JS 和一些兼容知识来完成页面的构建，动效的制作。</p>
+<p>而现阶段的前端开发，工作的很重要的部分，就是使用 Vue/React 或其他 MVVM 框架来完成我们的组件，并组织我们的页面。</p>
+<p>我们来进入现实的开发场景。你接手一个需求后，最先做的是什么？</p>
+<p>如果是一个新项目，你可能需要思考一些架构上的东西，比如：是否启用单页架构、使用什么开发框架、是否需要状态管理工具、资源构建怎么处理。嗯，你会饶有乐趣，然后兴致满满地开工。</p>
+<p>事实上，新的项目并不多，我们更多时候也都是在维护现有代码，可能有很多事情会让你你觉得无奈的。比如，你对现有架构的不满意，对当前的业务逻辑书写得这么复杂表示不理解。于是，你想要重构。当然，我也希望重构。但是，我们的生命是否允许你消耗这段时间来重构这段老的逻辑。答案，是否。</p>
+<p>所以，更重要地就是，阻止更多的代码恶化，这似乎比你单枪匹马搞重构，有用的多。这也是本文的重点，如何在现有项目，新需求的场景下，书写更可维护的组件化代码。</p>
+<h2 id="关于-RegularJS-开发的一些槽点"><a href="#关于-RegularJS-开发的一些槽点" class="headerlink" title="关于 RegularJS 开发的一些槽点"></a>关于 RegularJS 开发的一些槽点</h2><p>RegularJS 是网易出品的一款 MVVM 框架，本身其设计思路，和学习成本，都算中上。但是，作者对于设计思路在文档中的体现太少，导致顺势而为的使用者不多。比如说，下面的一些用法：</p>
+<h3 id="1-过度庞大的组件"><a href="#1-过度庞大的组件" class="headerlink" title="1. 过度庞大的组件"></a>1. 过度庞大的组件</h3><h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>一个组件，原本可以拆成若干个组件来单独处理 UI 和 行为，现在被放到了一个组件里，使得组件过大，导致维护性、扩展性降低。</p>
+<h4 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h4><p>组件拆分有很多原则可以参考：</p>
+<ol>
+<li>六大设计原则的 「单一职责原则」，尽可能保证每个组件的职责单一性；</li>
+<li>当前比较盛行的 「容器组件」与「UI 组件」的方案，「容器组件」用于控制用户状态，并做一些数据更新操作，不直接表现UI；「UI组件」则主要负责 UI 展现，不做具体的逻辑处理，需要更新数据，尽可能使用事件，交给容器组件处理；</li>
+</ol>
+<h3 id="2-组件原型上存放一些原本可以抽出的方法"><a href="#2-组件原型上存放一些原本可以抽出的方法" class="headerlink" title="2. 组件原型上存放一些原本可以抽出的方法"></a>2. 组件原型上存放一些原本可以抽出的方法</h3><h4 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h4><p>组件原型链上放置了过多不属于 <code>this</code> 的处理逻辑，导致组件的可维护性与可理解性降低。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> ComponentA = Regular.extend(&#123;</div><div class="line">    getList() &#123;</div><div class="line">        <span class="keyword">this</span>.$request(&#123;</div><div class="line">            url,</div><div class="line">            success(&#123;</div><div class="line">                code, body</div><div class="line">            &#125;) &#123;</div><div class="line">                <span class="keyword">if</span> (code === <span class="number">200</span>) &#123;</div><div class="line">                    <span class="keyword">this</span>.getListCallBack();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &#125;,</div><div class="line">    getListCallBack(&#123;list&#125;) &#123;</div><div class="line">        <span class="keyword">this</span>.filterList(list);</div><div class="line">    &#125;,</div><div class="line">    filterList(list) &#123;</div><div class="line">        <span class="keyword">this</span>.data.list = list.map(<span class="function">(<span class="params">&#123;title, content&#125;</span>) =&gt;</span> &#123;</div><div class="line">            <span class="keyword">return</span> &#123;</div><div class="line">                title, content</div><div class="line">            &#125;;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="建议-1"><a href="#建议-1" class="headerlink" title="建议"></a>建议</h4><p>纯函数对于可测试性和可预期性都有较大的优势。</p>
+<p>所以，不如把一些无关 <code>this</code> 的方法抽出来吧，把他们作为一些纯函数在你的组件生命周期中调用。</p>
+<p>比如，把发 Ajax 请求的方法抽成 service，统一管理，把一些对象处理函数独立成 filter，总之 this 上尽可能的干净，对后期的维护是很有帮助的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> filterList(list) &#123;</div><div class="line">    <span class="keyword">return</span> list.map(<span class="function">(<span class="params">&#123;title, content&#125;</span>) =&gt;</span> &#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            title, content</div><div class="line">        &#125;;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> ComponentA = Regular.extend(&#123;</div><div class="line">    computed: &#123;</div><div class="line">        title()&#123;</div><div class="line">            <span class="keyword">this</span>.getTitles();</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    onButtonClick() &#123;</div><div class="line">        service.getList(&#123;</div><div class="line"></div><div class="line">        &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            <span class="keyword">this</span>.setList(list);</div><div class="line">        &#125;)</div><div class="line">    &#125;,</div><div class="line">    setList(&#123;list&#125;) &#123;</div><div class="line">        <span class="keyword">this</span>.data.list = filterList(list);</div><div class="line">    &#125;,</div><div class="line">    getTitles() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.data.list.map(<span class="function"><span class="params">item</span> =&gt;</span> item.title);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>一般三类方法是必须的 1. 事件 handler; 2. compute get 方法; 3. data 的操作方法</p>
+</blockquote>
+<ol>
+<li>事件 handler 可以让你的函数更贴近于事件编程方式，更便于理解；</li>
+<li>使用 set 方法去设置 data 的数据，可以让你的 data 修改更可控；</li>
+<li>将 computed 抽出成方法，可以在 js 中复用 computed 的逻辑；</li>
+</ol>
+<p>原则就是，能挪出去的就挪出去作为纯函数。</p>
+<h3 id="3-滥用双向绑定"><a href="#3-滥用双向绑定" class="headerlink" title="3. 滥用双向绑定"></a>3. 滥用双向绑定</h3><h4 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h4><p>双向绑定，是指数据更新与UI行为的绑定操作。经常会出现一个对象依次传入多层组件的情况，这时候最省力的数据更新方式，可能就是直接在子组件内修改这个对象。</p>
+<p>Index 组件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ComponentA</span> <span class="attr">obj</span>=<span class="string">&#123;obj&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">ComponentA</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>ComponentA 组件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ComponentB</span> <span class="attr">obj</span>=<span class="string">&#123;obj&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">ComponentB</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>ComponentB 组件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ComponentC</span> <span class="attr">obj</span>=<span class="string">&#123;obj&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">ComponentC</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>ComponentC 组件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">r-model</span>=<span class="string">&#123;obj.a&#125;/</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>我们看到如上这种情况，看似很巧妙的结合 RegularJS 的双向绑定，做了数据更新的操作，也能让最外层组件可以使用最新的 obj 对象做一些事情。但是，对于最外层组件而言， obj 的变化是不可预期的。换言之，开发者很难通过直接查看最外层组件，感知到 obj 对象可能发生的改变。这也是，双向绑定带来的弊端。</p>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>双向绑定的使用，非常方便，在深层嵌套的组件数据传递上，尤为明显。但它会使得数据的改变源头难以追踪，代码接手时也容易留坑，不好理解。</p>
+<p>那么，我们应该控制住自己，不要过分依赖这种能力。换句话说，如果你肯定你的项目是不需要被维护的，那么你去使用吧（逃）</p>
+<p>一般场景下，单向数据流的启用方式，是通过事件。</p>
+<p>ComponentA</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ComponentB</span></span></div><div class="line"><span class="tag">    <span class="attr">obj</span>=<span class="string">&#123;obj&#125;</span></span></div><div class="line"><span class="tag">    <span class="attr">on-btnClick</span>=<span class="string">&#123;&#125;</span></span></div><div class="line"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">ComponentB</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Regular.extend(&#123;</div><div class="line">    config() &#123;</div><div class="line">        extend(<span class="keyword">this</span>.data, &#123;</div><div class="line">            obj: &#123;</div><div class="line">                clicked: <span class="literal">false</span></div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &#125;,</div><div class="line">    onComponentBBtnClick() &#123;</div><div class="line">        <span class="keyword">this</span>.setClicked();</div><div class="line">    &#125;</div><div class="line">    setClicked() &#123;</div><div class="line">        <span class="keyword">this</span>.data.obj.clicked = <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<hr>
+<p>ComponentB<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">disable</span>=<span class="string">&#123;clicked&#125;</span> <span class="attr">on-click</span>=<span class="string">&#123;this.$emit(</span>'<span class="attr">btnClick</span>')&#125;&gt;</span>点我！<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>那么，如何解决深层嵌套组件的数据更新问题呢，就是使用状态管理工具，后面会提到。</p>
+<h3 id="4-习惯把所有数据都放置到-this-data-上"><a href="#4-习惯把所有数据都放置到-this-data-上" class="headerlink" title="4. 习惯把所有数据都放置到 this.data 上"></a>4. 习惯把所有数据都放置到 <code>this.data</code> 上</h3><h4 id="描述-3"><a href="#描述-3" class="headerlink" title="描述"></a>描述</h4><p>习惯把所有数据都挂载到 <code>this.data</code> 上。</p>
+<p>如果我们正视 data 的职责，data 只负责放置 UI 渲染相关数据。那么，我们平时开发中，很多操作是存在争议的：</p>
+<ol>
+<li>请求获取下来的数据，直接放置到 this.data 上的方式，后端在提供在前端的数据中，难免会存在一些冗余的字段，会直接赋值到 data 上，最直接的影响是导致脏值检查耗时增加，这些字段的存在会让你的 data 显得凌乱不清晰；</li>
+<li>大家可能会将一些逻辑计算的数据也放置到 data 上，但是这些数据对于模板渲染也是无关的。</li>
+</ol>
+<h4 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h4><p>这个问题的关键，是正确地认知 <code>this.data</code>。对于 MVVM 框架而言，最大的亮点莫过于视图与数据的绑定（单向 or 双向）， <code>this.data</code> 他真正的职责就是作为视图层渲染时提供必要的数据。</p>
+<p>那么，你可能就能理解一些类似的话了：<br>「React只是一个优秀的视图层框架，他将复杂的状态管理留给了你」</p>
+<p>所以，原则上不该把所有数据都放置到 <code>data</code> 上。其次，可以根据 1 中提到的方案，使用 「容器组件」和「UI组件」的分类，来区分我们的组件状态。</p>
+<ul>
+<li>「容器组件」可以放置一些逻辑处理相关的字段，用于与后端交互和分发组件。</li>
+<li>「UI 组件」的 <code>data</code> 应该避免赋值一些视图无关的状态。</li>
+</ul>
+<p>当然，必要时，推荐引入状态管理工具来管理你的状态。</p>
+<h3 id="5-组件传入的参数结构不明了"><a href="#5-组件传入的参数结构不明了" class="headerlink" title="5. 组件传入的参数结构不明了"></a>5. 组件传入的参数结构不明了</h3><h4 id="描述-4"><a href="#描述-4" class="headerlink" title="描述"></a>描述</h4><p>Index<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ComponentA</span> <span class="attr">obj</span>=<span class="string">&#123;obj&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">ComponentA</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>组件 ComponentA 的传入参数是 obj，但是 obj 对于调用者来说，是一个黑盒。直接阅读该组件的例子或现有代码，无法直接地了解到该组件的使用姿势。</p>
+<h4 id="解决-2"><a href="#解决-2" class="headerlink" title="解决"></a>解决</h4><p>所以，尽可能地直接明了地展现组件所需的属性，同时需要遵守遵守程序设计的「迪米特法则（最少知道原则）」，让所需的属性尽可能的少。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ComponentA</span> </span></div><div class="line"><span class="tag">    <span class="attr">name</span>=<span class="string">&#123;name&#125;</span></span></div><div class="line"><span class="tag">    <span class="attr">age</span>=<span class="string">&#123;age&#125;</span></span></div><div class="line"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">ComponentA</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="6-较长的表达式"><a href="#6-较长的表达式" class="headerlink" title="6. 较长的表达式"></a>6. 较长的表达式</h3><h4 id="描述-5"><a href="#描述-5" class="headerlink" title="描述"></a>描述</h4><p>Index<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;#list coupons as coupon&#125;</div><div class="line">    使用条件：&#123;coupon.couponType === 1 ? `满¥ $&#123;coupon.threshold&#125; 使用` : '无条件使用'&#125;</div><div class="line">&#123;/list&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="解决-3"><a href="#解决-3" class="headerlink" title="解决"></a>解决</h4><p>模板中不该存在过多的计算逻辑，很重要一点是，我们一般无法对模板进行 debug，所以将逻辑抽出安放到 filter 或 computed 中，是个不错的方式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Regular.extend(&#123;</div><div class="line">    template: <span class="string">`</span></div><div class="line"><span class="string">    &#123;#list coupons as coupon&#125;</span></div><div class="line"><span class="string">        使用条件：&#123;coupon|getCouponCondition&#125;</span></div><div class="line"><span class="string">    &#123;/list&#125;</span></div><div class="line"><span class="string">    `</span>,</div><div class="line">&#125;).filter(&#123;</div><div class="line">    getCouponCondition(coupon) &#123;</div><div class="line">        <span class="keyword">return</span> coupon.couponType === <span class="number">1</span> ? <span class="string">`满¥ <span class="subst">$&#123;coupon.threshold&#125;</span> 使用`</span> : <span class="string">'无条件使用'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>篇幅原因，简单列举几条。</p>
+<p>书写可维护的 Regular 组件，需要我们有关于设计基本原则的一些理解，并在实际的 MVVM 框架下展开。</p>
+<p>有接触过 Redux 的同学，可能会发现，上述的一些解决方案，有很多是借鉴自 Redux 的，如 单向数据流 、「容器组件」与「UI 组件」。那么如何使用状态管理来更为优雅地解决这些问题，本人另一篇文章 <a href="">Redux基础与实践</a> 正在飞奔而来！！！</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://imhype.github.io/2017/07/27/Regular 组件开发的一些建议/" data-title="Regular 组件开发的一些建议 | 七月上" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/07/27/Redux基础与实践/" title="Redux 基础与实践">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Redux 基础与实践</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/05/11/实践中的前后端分离/"  title="实践中的前后端分离">
+ <strong>NEXT:</strong><br/> 
+ <span>实践中的前后端分离
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于-RegularJS-开发的一些槽点"><span class="toc-number">2.</span> <span class="toc-text">关于 RegularJS 开发的一些槽点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-过度庞大的组件"><span class="toc-number">2.1.</span> <span class="toc-text">1. 过度庞大的组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述"><span class="toc-number">2.1.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建议"><span class="toc-number">2.1.2.</span> <span class="toc-text">建议</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-组件原型上存放一些原本可以抽出的方法"><span class="toc-number">2.2.</span> <span class="toc-text">2. 组件原型上存放一些原本可以抽出的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建议-1"><span class="toc-number">2.2.2.</span> <span class="toc-text">建议</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-滥用双向绑定"><span class="toc-number">2.3.</span> <span class="toc-text">3. 滥用双向绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述-2"><span class="toc-number">2.3.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决"><span class="toc-number">2.3.2.</span> <span class="toc-text">解决</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-习惯把所有数据都放置到-this-data-上"><span class="toc-number">2.4.</span> <span class="toc-text">4. 习惯把所有数据都放置到 this.data 上</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述-3"><span class="toc-number">2.4.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决-1"><span class="toc-number">2.4.2.</span> <span class="toc-text">解决</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-组件传入的参数结构不明了"><span class="toc-number">2.5.</span> <span class="toc-text">5. 组件传入的参数结构不明了</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述-4"><span class="toc-number">2.5.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决-2"><span class="toc-number">2.5.2.</span> <span class="toc-text">解决</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-较长的表达式"><span class="toc-number">2.6.</span> <span class="toc-text">6. 较长的表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#描述-5"><span class="toc-number">2.6.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决-3"><span class="toc-number">2.6.2.</span> <span class="toc-text">解决</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/Java-Web-环境配置/" title="Java Web 环境配置">Java Web 环境配置<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>8</sup></a></li>
+		
+			<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
+		
+			<li><a href="/tags/css/" title="css">css<sup>5</sup></a></li>
+		
+			<li><a href="/tags/node-js/" title="node.js">node.js<sup>1</sup></a></li>
+		
+			<li><a href="/tags/parser/" title="parser">parser<sup>1</sup></a></li>
+		
+			<li><a href="/tags/前端/" title="前端">前端<sup>1</sup></a></li>
+		
+			<li><a href="/tags/深入浅出数据结构/" title="深入浅出数据结构">深入浅出数据结构<sup>3</sup></a></li>
+		
+			<li><a href="/tags/生活/" title="生活">生活<sup>3</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		<a href="https://github.com/imhype" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		
+		<a href="http://imhype.github.io" target="_blank" title="君羽">君羽</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

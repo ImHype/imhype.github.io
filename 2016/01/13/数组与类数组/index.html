@@ -1,0 +1,404 @@
+
+ <!DOCTYPE HTML>
+<html lang="Chinese">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>数组与类数组 | 七月上</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="君羽">
+    
+    <meta name="description" content="数组与类数组数组–Js中不可获取的基础类，从JS诞生开始就存在于JS中的从最基础的增删改查，到后续的高级语法，一一做整理
+先来观察下Array实例的形态1234567891011var array = new Array(1,2,3,4,5);console.log(array);/** Array[5]0: 11: 22: 33: 44: 5length: 5__proto__: Array[0]*/
+如上，一个数组，包含数组本身的内容和一个不可枚举的length属性。">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/69f3e963f8eef1de49970dd1b0693565_l.jpg" alt="七月上" title="七月上"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="七月上">七月上</a></h1>
+				<h2 class="blog-motto">公元前我们太小,公元后我们又太老,没有谁见过,那一次真正美丽的微笑。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:imhype.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/13/数组与类数组/" title="数组与类数组" itemprop="url">数组与类数组</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://imhype.github.io" title="君羽">君羽</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-01-13T06:23:34.000Z" itemprop="datePublished">2016-01-13</time>
+    Updated:<time datetime="2017-10-29T10:59:06.102Z" itemprop="dateModified">2017-10-29</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数组与类数组"><span class="toc-number">1.</span> <span class="toc-text">数组与类数组</span></a></li></ol>
+		</div>
+		
+		<h1 id="数组与类数组"><a href="#数组与类数组" class="headerlink" title="数组与类数组"></a>数组与类数组</h1><p>数组–Js中不可获取的基础类，从JS诞生开始就存在于JS中的<br>从最基础的增删改查，到后续的高级语法，一一做整理</p>
+<p>先来观察下Array实例的形态<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var<span class="built_in"> array </span>=<span class="built_in"> new </span>Array(1,2,3,4,5);</div><div class="line">console.log(array);</div><div class="line">/** Array[5]</div><div class="line">0: 1</div><div class="line">1: 2</div><div class="line">2: 3</div><div class="line">3: 4</div><div class="line">4: 5</div><div class="line">length: 5</div><div class="line">__proto__: Array[0]</div><div class="line">*/</div></pre></td></tr></table></figure></p>
+<p>如上，一个数组，包含数组本身的内容和一个不可枚举的length属性。<br><a id="more"></a></p>
+<p>一 创建数组</p>
+<ul>
+<li>var arr = new Array();<blockquote>
+<p>新建一个数组，数组的长度为0，且没有内容</p>
+</blockquote>
+</li>
+<li>var a = new Array(5);<blockquote>
+<p>新建一个数组，数组的长度为5，但不是上限</p>
+</blockquote>
+</li>
+<li>var a = new Array(“b”, 2, “a”, 4); 与 var a = new Array([“b”, 2, “a”, 4,]);</li>
+<li>var a = [“b”, 2, “a”, 4,];</li>
+</ul>
+<p>我们做几个比较<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="type">Array</span>(<span class="number">5</span>);<span class="comment">//length:5</span></div><div class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> <span class="type">Array</span>([<span class="number">5</span>]);<span class="comment">//[[5]]</span></div></pre></td></tr></table></figure></p>
+<p>new Array(5) 与 new Array([5]) 的区别<br>表示创建一个length为5的数组和创建一个长度为1的数组，数组第一个元素的内容是[5]<br>那么如何创建一个只有一个元素的数组，且第一个元素是5呢<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="type">Array</span>();</div><div class="line">a[<span class="number">0</span>]=<span class="number">5</span></div></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">var a</span> = [5];</div></pre></td></tr></table></figure></p>
+<hr>
+<p>另外还有<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="type">Array</span>([<span class="string">"b"</span>, <span class="number">2</span>, <span class="string">"a"</span>, <span class="number">4</span>,]);</div><div class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> <span class="type">Array</span>(<span class="string">"b"</span>, <span class="number">2</span>, <span class="string">"a"</span>, <span class="number">4</span>);</div></pre></td></tr></table></figure></p>
+<p>该代码表示创建一个[[“b”, 2, “a”, 4,]]的数组</p>
+<hr>
+<p>Array型的<strong>proto</strong>比较多，主要有如下</p>
+<ul>
+<li>push 数组尾部推入，返回数组的长度</li>
+<li>shift 数组首部取出 ，返回取出的值</li>
+<li>unshift 数组首部推入 ，返回数组的长度</li>
+<li>pop 数组尾部取出 ，返回取出的值</li>
+<li>indexOf 返回元素在数组中的位置，如果不存在则返回-1</li>
+<li>sort 数组进行排序，可以传入一个函数，函数带两个参数，作为比较的标准</li>
+<li>join 把数组串联成字符串</li>
+<li>toString 数组转换转换成字符串</li>
+<li>concat 数组合并</li>
+<li>reverse 倒序<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a =[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line"><span class="keyword">var</span> b = [<span class="number">2</span>];</div><div class="line"><span class="keyword">var</span> c=[<span class="number">2</span>,[<span class="number">2</span>,<span class="number">3</span>],<span class="number">1</span>];</div><div class="line"><span class="keyword">var</span> n = a.concat(b,c);</div><div class="line"><span class="built_in">console</span>.log(n);</div><div class="line"><span class="comment">// [1, 2, 3, 2, 2, [2,3], 1]</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>还有一些es5新出的一些数组操作,我们一次做es3的兼容</p>
+<ul>
+<li><p>forEach</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="keyword">Array</span>.prototype.<span class="keyword">forEach</span>)&#123;</div><div class="line">	<span class="keyword">Array</span>.prototype.<span class="keyword">forEach</span>=<span class="function"><span class="keyword">function</span><span class="params">(fn)</span></span>&#123;</div><div class="line">		<span class="keyword">var</span> arr = this;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>,len = arr.length;i&lt;len;i++)&#123;</div><div class="line">			fn(arr[i],i);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>every</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.every)&#123;</div><div class="line">	<span class="built_in">Array</span>.prototype.every=<span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</div><div class="line">		<span class="keyword">var</span> arr = <span class="keyword">this</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>,len = arr.length;i&lt;len;i++)&#123;</div><div class="line">			<span class="keyword">if</span>(!fn(arr[i],i))&#123;</div><div class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;		</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>some 就是every反一下,只需一个满足条件就 return true</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.some)&#123;</div><div class="line">	<span class="built_in">Array</span>.prototype.some=<span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</div><div class="line">		<span class="keyword">var</span> arr = <span class="keyword">this</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>,len = arr.length;i&lt;len;i++)&#123;</div><div class="line">			<span class="keyword">if</span>(fn(arr[i],i))&#123;</div><div class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125;		</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>filter</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.filter)&#123;</div><div class="line">	<span class="built_in">Array</span>.prototype.filter=<span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</div><div class="line">		<span class="keyword">var</span> arr = <span class="keyword">this</span></div><div class="line">		, filterArr = [];</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>,len = arr.length;i&lt;len;i++)&#123;</div><div class="line">			<span class="keyword">if</span>(fn(arr[i],i))&#123;</div><div class="line">				filterArr.push(arr[i]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> filterArr;</div><div class="line">	&#125;		</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>map</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.map)&#123;</div><div class="line">	<span class="built_in">Array</span>.prototype.map=<span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</div><div class="line">		<span class="keyword">var</span> arr = <span class="keyword">this</span></div><div class="line">		, mapArr = [];</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>,len = arr.length;i&lt;len;i++)&#123;</div><div class="line">			mapArr.push(fn(arr[i],i));</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> filterArr;</div><div class="line">	&#125;		</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>reduce</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.reduce)&#123;</div><div class="line">	<span class="built_in">Array</span>.prototype.reduce=<span class="function"><span class="keyword">function</span>(<span class="params">fn,initialValue</span>)</span>&#123;</div><div class="line">		<span class="keyword">var</span> arr = <span class="keyword">this</span></div><div class="line">		, result = <span class="literal">null</span>;</div><div class="line">		result = initialValue?fn(initialValue,arr[<span class="number">0</span>]):arr[<span class="number">0</span>];</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>,len = arr.length;i&lt;len;i++)&#123;</div><div class="line">			result = fn(result,arr[i],i,arr);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> result;</div><div class="line">	&#125;		</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>reduceRight</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!Array.prototype.reduceRight)&#123;</div><div class="line">	Array.prototype.reduceRight=function(fn,initialValue)&#123;</div><div class="line">		var arr = this</div><div class="line">		, <span class="literal">result</span> = null;</div><div class="line">		<span class="literal">result</span> = initialValue?fn(initialValue,arr[arr.<span class="built_in">length</span><span class="number">-1</span>]):arr[arr.<span class="built_in">length</span><span class="number">-1</span>];</div><div class="line">		<span class="keyword">for</span>(var i = arr.<span class="built_in">length</span><span class="number">-1</span>;i<span class="comment">--;)&#123;</span></div><div class="line">			<span class="literal">result</span> = fn(<span class="literal">result</span>,arr[i],i,arr);</div><div class="line">		&#125;</div><div class="line"><span class="built_in">		return</span> <span class="literal">result</span>;</div><div class="line">	&#125;		</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>splice</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.splice)&#123;</div><div class="line">	<span class="built_in">Array</span>.prototype.splice=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">		<span class="keyword">var</span> arr = <span class="keyword">this</span></div><div class="line">		 ,spliceArr=[]</div><div class="line">		 ,cacheArr=[]</div><div class="line">		 ,addLen = <span class="built_in">arguments</span>.length<span class="number">-2</span>;</div><div class="line">		<span class="keyword">if</span>(<span class="built_in">arguments</span>[<span class="number">0</span>]+<span class="built_in">arguments</span>[<span class="number">1</span>]&gt;arr.length)&#123;</div><div class="line">			<span class="built_in">arguments</span>[<span class="number">1</span>] = arr.length- <span class="built_in">arguments</span>[<span class="number">0</span>];			</div><div class="line">		&#125; </div><div class="line">		<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</div><div class="line">			cacheArr[i] = arr[i];</div><div class="line">		&#125;;</div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">max</span>(<span class="params">a1,a2</span>)</span>&#123;</div><div class="line">			<span class="keyword">return</span> (a1&gt;a2?a1:a2);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="built_in">arguments</span>[<span class="number">0</span>],len = max(arr.length,arr.length-<span class="built_in">arguments</span>[<span class="number">1</span>]+addLen);i&lt;len;i++)&#123;</div><div class="line">			<span class="keyword">if</span>(i&lt;<span class="built_in">arguments</span>[<span class="number">0</span>]+<span class="built_in">arguments</span>[<span class="number">1</span>])&#123;</div><div class="line">				spliceArr.push(arr[i]);</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(i&lt;<span class="built_in">arguments</span>[<span class="number">0</span>]+addLen)&#123;</div><div class="line">				arr[i] = <span class="built_in">arguments</span>[i-<span class="built_in">arguments</span>[<span class="number">0</span>]+<span class="number">2</span>];</div><div class="line">			&#125;<span class="keyword">else</span>&#123;</div><div class="line">				<span class="keyword">var</span> number = i-addLen+<span class="built_in">arguments</span>[<span class="number">1</span>];</div><div class="line">				arr[i]=cacheArr[number]</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(i&gt;=len-<span class="built_in">arguments</span>[<span class="number">1</span>]+addLen)&#123;</div><div class="line">				<span class="keyword">delete</span> arr[i];</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> spliceArr;</div><div class="line">	&#125;		</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>写的略蛋疼，这个splice文章有点多<br>还有一种用concat相连的比较简单<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.splice)&#123;</div><div class="line">	<span class="built_in">Array</span>.prototype.splice=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">		<span class="keyword">var</span> arr = <span class="keyword">this</span></div><div class="line">		 ,spliceArr=[]</div><div class="line">		 ,left = []</div><div class="line">		 ,right = []</div><div class="line">		 ,args = [];</div><div class="line">		 <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">2</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</div><div class="line">		 	args.push(<span class="built_in">arguments</span>[i]);</div><div class="line">		 &#125;;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,len=arr.length;i&lt;len;i++)&#123;</div><div class="line">			<span class="keyword">if</span>(i&lt;<span class="built_in">arguments</span>[<span class="number">0</span>])&#123;</div><div class="line">				left.push(arr[i]);</div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(i&gt;=<span class="built_in">arguments</span>[<span class="number">0</span>]&amp;&amp;i&lt;<span class="built_in">arguments</span>[<span class="number">0</span>]+<span class="built_in">arguments</span>[<span class="number">1</span>])&#123;</div><div class="line">				spliceArr.push(arr[i]);</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span>&#123;</div><div class="line">				right.push(arr[i]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		arr = <span class="keyword">new</span> <span class="built_in">Array</span>();</div><div class="line">		arr = <span class="built_in">Array</span>.prototype.concat(arr,left,args,right);</div><div class="line">		<span class="keyword">return</span> spliceArr;</div><div class="line">	&#125;		</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://imhype.github.io/2016/01/13/数组与类数组/" data-title="数组与类数组 | 七月上" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/01/13/作用域与变量预解析/" title="作用域与变量预解析">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  作用域与变量预解析</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/01/13/上下文和this指针/"  title="上下文和this指针">
+ <strong>NEXT:</strong><br/> 
+ <span>上下文和this指针
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数组与类数组"><span class="toc-number">1.</span> <span class="toc-text">数组与类数组</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/Java-Web-环境配置/" title="Java Web 环境配置">Java Web 环境配置<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>8</sup></a></li>
+		
+			<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
+		
+			<li><a href="/tags/css/" title="css">css<sup>5</sup></a></li>
+		
+			<li><a href="/tags/node-js/" title="node.js">node.js<sup>1</sup></a></li>
+		
+			<li><a href="/tags/parser/" title="parser">parser<sup>1</sup></a></li>
+		
+			<li><a href="/tags/前端/" title="前端">前端<sup>1</sup></a></li>
+		
+			<li><a href="/tags/深入浅出数据结构/" title="深入浅出数据结构">深入浅出数据结构<sup>3</sup></a></li>
+		
+			<li><a href="/tags/生活/" title="生活">生活<sup>3</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		<a href="https://github.com/imhype" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		
+		<a href="http://imhype.github.io" target="_blank" title="君羽">君羽</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

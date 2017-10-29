@@ -1,0 +1,386 @@
+
+ <!DOCTYPE HTML>
+<html lang="Chinese">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>你好，前端 | 七月上</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="君羽">
+    
+    <meta name="description" content="时光荏苒，接触前端快要两年半了，有一些对于前端的感悟，想要记录下来。">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/69f3e963f8eef1de49970dd1b0693565_l.jpg" alt="七月上" title="七月上"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="七月上">七月上</a></h1>
+				<h2 class="blog-motto">公元前我们太小,公元后我们又太老,没有谁见过,那一次真正美丽的微笑。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:imhype.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/12/31/你好，前端/" title="你好，前端" itemprop="url">你好，前端</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://imhype.github.io" title="君羽">君羽</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-12-31T07:59:38.000Z" itemprop="datePublished">2016-12-31</time>
+    Updated:<time datetime="2017-10-29T10:59:06.102Z" itemprop="dateModified">2017-10-29</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前端是什么？"><span class="toc-number">1.</span> <span class="toc-text">前端是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前端工程"><span class="toc-number">2.</span> <span class="toc-text">前端工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前端工程师"><span class="toc-number">3.</span> <span class="toc-text">前端工程师</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前端工程师方向"><span class="toc-number">4.</span> <span class="toc-text">前端工程师方向</span></a></li></ol>
+		</div>
+		
+		<p>时光荏苒，接触前端快要两年半了，有一些对于前端的感悟，想要记录下来。</p>
+<a id="more"></a>
+<p>大部分前端工程师都是折翼的天使。为什么会有这个说法？没有任何专业直接培养前端人才，很大一部分的前端工程师都是通过放弃本专业就业而自学前端以及通过项目积累建立的识体系。</p>
+<p>人才的紧缺，市场的需要，近两年也是不断冒出前端的培训机构，讲课人一般是几年前端工作经历的前端工程师，也会有一些各方面都比较厉害且体系正确。可是不乏一些有一定工作年限但几年却处处浅尝辄止的人，仅凭他们的工作经验而在新手面前以老人的姿态讲课带路，以及推广一套不规范的知识体系，这对新人最直观的害处是觉得前端简单，前端就是切页面的，用jQuery的就是前端。</p>
+<p>这边必须提一下的博主公司（网易）的一个产品云课堂，里面的前端微专业在网易众多优秀的前端工程师的交流和积累下，已经有了一定的底蕴，推荐一下。除此以外，还有今年的百度前端课堂。百度公司虽然一贯没啥好评，不过技术上还是值得认可的，所以也推荐一下。</p>
+<p>接下来进入正文。</p>
+<h3 id="前端是什么？"><a href="#前端是什么？" class="headerlink" title="前端是什么？"></a>前端是什么？</h3><p>首先，想要接触一个东西，得去了解它是什么。</p>
+<p>有一台计算机，那只是一台计算机；当有了两台的计算机，便可以通过网络建立联系。两者数据对接需要通过计算机网络的五层：物理层、数据链路层、传输层、网络层和应用层，自顶向下的数据传输。而在计算机程序体系中，抽象出TCP和UDP两种方式，负责给开发人员调用来操作最底层的硬件进行网络传输。</p>
+<p>简单回顾下TCP网络传输的整个过程。首先，发送方需要发送数据报前必须先通过三次握手建立连接，发送方发送syn包，接收方接收到syn包必须确认，同时也向发送方发送syn等待发送方确认，发送方接收到对面传来的(syn+ack)时，发送ack包以确认，至此，三次握手完成并建立全双工连接。值得一提的是，双方有一个队列来维护对方传来的syn包。受计算机连接的网络的数据链接层的最大传输单元的限制，会有一个最大传输段（MSS），为保证可靠性，将数据分段形成报文段（segment）。在收到报文段时，会计算校验和有差错则丢弃。超过一定时间为收到确认信号时，启动超时重传，并使用滑动窗口来进行流量控制。</p>
+<p>如上，通过TCP建立的全双工网络，人们可以互相建立联系，但是维持这一段网络需要花费高昂的硬件成本而且在某些时候是不必要的。于是，一些更面向服务的应用层协议被应用到了 1 - 多 的网络体系中，如 http 协议。服务端只需要维护一个进程并占用一个端口来统一对所有的请求方进行响应。</p>
+<p>这个时候，如果按照 http 协议这个切面分，协议的响应方就是后端，协议的请求方则为前端。这是一个比较广义上的解释，也有狭义的：切图仔，做网页的。</p>
+<h3 id="前端工程"><a href="#前端工程" class="headerlink" title="前端工程"></a>前端工程</h3><p>显然，但从一个 【前端是什么？】的论题上考虑，只能得出前端这个领域的范围是怎么样的。如果需要进一步地了解在前端，需要讲这个词细分，先讲一讲前端工程。<br>前端工程其实是软件工程的范畴，以实现系统的良好的性能，代码的高复用、高可扩展性与高可读性为目标。</p>
+<ol>
+<li>前端能控制的性能优化有：  <ul>
+<li>浏览器渲染<ul>
+<li>熟悉浏览器解析渲染过程，页面内CSS文件会阻塞渲染，异步CSS文件会导致回流；</li>
+<li>浏览器在document下载结束会检测静态资源，新开线程下载（有并发上限），在带宽限制的条件下，无序并发会导致主资源速度下降，从而影响首屏渲染；</li>
+</ul>
+</li>
+<li>协议与缓存<ul>
+<li>熟悉 缓存特性，缓存可用时会使用缓存资源，这个时候可以避免请求体的传输，对性能有极大提高；</li>
+<li>减少Cookie携带；</li>
+</ul>
+</li>
+<li>文件优化与 cdn<ul>
+<li>合并样式，脚本；</li>
+<li>合并 icon；</li>
+<li>开启 GZIP；</li>
+<li>优化脚本使用的库；</li>
+<li>图片延迟加载；</li>
+<li>熟悉 cdn api，合理控制静态资源文件大小<br>。。。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>拦路虎<br> 公共脚本、公共样式文件的堆积，合理使用公共样式、公共脚本。可以定制自己团队的 UI，除了团队 UI 以外的东西全部不要放到公共的部分<br> 。。。</li>
+</ol>
+<h3 id="前端工程师"><a href="#前端工程师" class="headerlink" title="前端工程师"></a>前端工程师</h3><p>前端工程的搭建者，就是前端工程师，平时的工作大致分为两类，一类是写基础设施层，一类是写上层业务层。比较重要的一些能力有：</p>
+<ul>
+<li>前端基础 – html/css/js 语法，应用能力</li>
+<li>计算机基础 – 三门课衍生，数据结构 + 操作系统 + 计算机网络，关键是有这个意识</li>
+<li>软件工程思维 – 从程序设计基本原则出发，完成代码构建、高可复用架构设计的能力</li>
+<li>框架设计能力 / 业务逻辑思考能力 – 这块可以挑选自己感兴趣的 前端领域 / 行业，需要前面三者作为基础，是最终体现</li>
+</ul>
+<h3 id="前端工程师方向"><a href="#前端工程师方向" class="headerlink" title="前端工程师方向"></a>前端工程师方向</h3><ul>
+<li>Node.js 服务端开发 / 前端工具开发</li>
+<li>移动端开发 React Native 切入</li>
+<li>桌面应用开发</li>
+<li>组件化的前端开发，React / Vue + Redux （状态思维）</li>
+<li>图形学渲染，Css3/Canvas 2d/WebGl</li>
+</ul>
+<p>总结一下， 前端不只是切图的 ^_^</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/前端/">前端</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://imhype.github.io/2016/12/31/你好，前端/" data-title="你好，前端 | 七月上" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/12/31/你好17/" title="你好，17">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  你好，17</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/04/12/深入浅出数据结构之栈/"  title="深入浅出数据结构之栈">
+ <strong>NEXT:</strong><br/> 
+ <span>深入浅出数据结构之栈
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前端是什么？"><span class="toc-number">1.</span> <span class="toc-text">前端是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前端工程"><span class="toc-number">2.</span> <span class="toc-text">前端工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前端工程师"><span class="toc-number">3.</span> <span class="toc-text">前端工程师</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前端工程师方向"><span class="toc-number">4.</span> <span class="toc-text">前端工程师方向</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/Java-Web-环境配置/" title="Java Web 环境配置">Java Web 环境配置<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>8</sup></a></li>
+		
+			<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
+		
+			<li><a href="/tags/css/" title="css">css<sup>5</sup></a></li>
+		
+			<li><a href="/tags/node-js/" title="node.js">node.js<sup>1</sup></a></li>
+		
+			<li><a href="/tags/parser/" title="parser">parser<sup>1</sup></a></li>
+		
+			<li><a href="/tags/前端/" title="前端">前端<sup>1</sup></a></li>
+		
+			<li><a href="/tags/深入浅出数据结构/" title="深入浅出数据结构">深入浅出数据结构<sup>3</sup></a></li>
+		
+			<li><a href="/tags/生活/" title="生活">生活<sup>3</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		<a href="https://github.com/imhype" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		
+		<a href="http://imhype.github.io" target="_blank" title="君羽">君羽</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,350 @@
+
+ <!DOCTYPE HTML>
+<html lang="Chinese">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>JavaScript闭包 | 七月上</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="君羽">
+    
+    <meta name="description" content="作用域和闭包每个函数都有自己的作用域，而每个变量其实是有作用域链12345var a = 1;(function()&amp;#123;	a = 0;&amp;#125;());console.log(a);
+此处由于a是全局的变量，故在自执行函数里面改变a的值，函数外部也会随之改变">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/69f3e963f8eef1de49970dd1b0693565_l.jpg" alt="七月上" title="七月上"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="七月上">七月上</a></h1>
+				<h2 class="blog-motto">公元前我们太小,公元后我们又太老,没有谁见过,那一次真正美丽的微笑。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:imhype.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/13/JavaScript闭包/" title="JavaScript闭包" itemprop="url">JavaScript闭包</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://imhype.github.io" title="君羽">君羽</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-01-13T06:22:07.000Z" itemprop="datePublished">2016-01-13</time>
+    Updated:<time datetime="2017-10-29T10:59:06.086Z" itemprop="dateModified">2017-10-29</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#作用域和闭包"><span class="toc-number">1.</span> <span class="toc-text">作用域和闭包</span></a></li></ol>
+		</div>
+		
+		<h1 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h1><p>每个函数都有自己的作用域，而每个变量其实是有作用域链<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line">(<span class="function"><span class="keyword">function</span><span class="params">()</span><span class="comment">&#123;</span></span></div><div class="line"><span class="function"><span class="comment">	a = 0;</span></span></div><div class="line"><span class="function"><span class="comment">&#125;</span><span class="params">()</span>);</span></div><div class="line">console.log(a);</div></pre></td></tr></table></figure></p>
+<p>此处由于a是全局的变量，故在自执行函数里面改变a的值，函数外部也会随之改变<br><a id="more"></a></p>
+<p>如果换成a作为function内的局部变量呢,如何实现外部进行内部函数的删改呢<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span><span class="params">()</span><span class="comment">&#123;</span></span></div><div class="line"><span class="function"><span class="comment">	var a = 1;</span></span></div><div class="line"><span class="function"><span class="comment">&#125;</span></span></div><div class="line"><span class="function"><span class="title">console</span>.<span class="title">log</span><span class="params">(a)</span>;</span></div></pre></td></tr></table></figure></p>
+<p>可以这么玩<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		getA:<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</div><div class="line">			<span class="keyword">return</span> a;</div><div class="line">		&#125;,</div><div class="line">		setA:<span class="function"><span class="keyword">function</span><span class="params">(b)</span></span>&#123;</div><div class="line">			a = b;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">a().getA();</div><div class="line">a().setA(<span class="number">5</span>);</div></pre></td></tr></table></figure></p>
+<p>此处实现了外部对内部变量的读取，return 出来的getA和setA有从外部作用域获取 function a 内部变量的权力，形成了闭包<br>而由于getA 和 setA 的关系，a变量会保存在内存中</p>
+<p>另外还有<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">for(<span class="name">var</span> i=0<span class="comment">;i&lt;5;i++)&#123;</span></div><div class="line">	(<span class="name">function</span>(<span class="name">index</span>)&#123;</div><div class="line">		buttons[index].onclick=function()&#123;</div><div class="line">			console.log(<span class="name">index</span>)<span class="comment">;</span></div><div class="line">		&#125;</div><div class="line">	&#125;(<span class="name">i</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>此处由于自执行函数内部的onclick的相应函数读取了onclick函数外面的index属性，故该函数被以闭包的形式保存了下来，导致引用了的index也保存了下来，其实与下面的方式是一样的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</div><div class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">var</span> index = i;</div><div class="line">		<span class="comment">/**</span></div><div class="line"><span class="comment">		* 不同的index</span></div><div class="line"><span class="comment">		*/</span></div><div class="line">		buttons[index].onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="built_in">console</span>.log(index);</div><div class="line">		&#125;</div><div class="line">	&#125;())</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>为什么<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">for(var i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</div><div class="line">	var <span class="built_in">index</span> = i;</div><div class="line">	buttons[<span class="built_in">index</span>].onclick=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</div><div class="line">		console.<span class="built_in">log</span>(<span class="built_in">index</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>不行呢？<br>因为:</p>
+<ol>
+<li>for循环是没有作用域的</li>
+<li>5个index处于同一级别的作用域内，被修改了</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(x);</div><div class="line">&#125;</div><div class="line"> </div><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line"> </div><div class="line">  <span class="keyword">var</span> x = <span class="number">20</span>;</div><div class="line"> </div><div class="line">  foo();</div><div class="line"> </div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>由这个例子可以得出，一个函数在被创建（是创建，不是执行）的时候，会保存外部的作用域，以用于未来函数调用时的变量查找</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://imhype.github.io/2016/01/13/JavaScript闭包/" data-title="JavaScript闭包 | 七月上" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/01/13/前后端分离之我见/" title="实践中的前后端分离">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  实践中的前后端分离</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/01/13/prototype-chain/"  title="prototype chain">
+ <strong>NEXT:</strong><br/> 
+ <span>prototype chain
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#作用域和闭包"><span class="toc-number">1.</span> <span class="toc-text">作用域和闭包</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/Java-Web-环境配置/" title="Java Web 环境配置">Java Web 环境配置<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>8</sup></a></li>
+		
+			<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
+		
+			<li><a href="/tags/css/" title="css">css<sup>5</sup></a></li>
+		
+			<li><a href="/tags/node-js/" title="node.js">node.js<sup>1</sup></a></li>
+		
+			<li><a href="/tags/parser/" title="parser">parser<sup>1</sup></a></li>
+		
+			<li><a href="/tags/前端/" title="前端">前端<sup>1</sup></a></li>
+		
+			<li><a href="/tags/深入浅出数据结构/" title="深入浅出数据结构">深入浅出数据结构<sup>3</sup></a></li>
+		
+			<li><a href="/tags/生活/" title="生活">生活<sup>3</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		<a href="https://github.com/imhype" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		
+		<a href="http://imhype.github.io" target="_blank" title="君羽">君羽</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>
